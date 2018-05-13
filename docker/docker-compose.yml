@@ -1,0 +1,53 @@
+version: '2'
+services:
+
+  nginx:
+    image: nginx
+    restart: always
+    container_name: nginx
+    tty: true
+    ports:
+     - "80:80"
+    volumes:
+      - ../docker:/opt/docker
+      - ../docker/containers/nginx/conf.d:/etc/nginx/conf.d:ro
+
+  backend:
+    build: containers/backend
+    image: mojo_backend
+    container_name: backend
+    hostname: backend
+    restart: always
+    ports:
+     - "3000:2000"
+    depends_on:
+      - nginx
+    volumes:
+      - ../backend:/opt/app
+      - ../docker:/opt/docker
+    command: /opt/docker/run_files/backend.sh
+
+  spa:
+    image: "node:8"
+    container_name: spa
+    restart: always
+    hostname: spa
+    depends_on:
+      - backend
+    volumes:
+      - ../spa:/opt/app
+      - ../docker:/opt/docker
+    command: /opt/docker/run_files/spa.sh
+
+  # db:
+  #   image: mysql
+  #   container_name: db
+  #   restart: always
+  #   ports:
+  #    - "3307:3306"
+  #   volumes:
+  #     - ../istin.pro:/opt/app
+  #     - ../docker:/opt/docker
+  #   environment:
+  #         MYSQL_ROOT_PASSWORD: rootpassword
+
