@@ -39,15 +39,3 @@ services:
       - ../docker:/opt/docker
     command: /opt/docker/run_files/spa.sh
 
-  # db:
-  #   image: mysql
-  #   container_name: db
-  #   restart: always
-  #   ports:
-  #    - "3307:3306"
-  #   volumes:
-  #     - ../istin.pro:/opt/app
-  #     - ../docker:/opt/docker
-  #   environment:
-  #         MYSQL_ROOT_PASSWORD: rootpassword
-

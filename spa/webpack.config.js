@@ -54,6 +54,10 @@ module.exports = {
   performance: {
     hints: false
   },
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000
+  },
   devtool: '#eval-source-map'
 }
 
