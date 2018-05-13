@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     getTime: function() {
-      this.$http.get('http://localhost:3000/time').then(response => {
+      this.$http.get('http://api.docker-example.ru/time').then(response => {
 
         // get body data
         let dateTime = response.body;
